@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { countUp, countDown } from '../actions'
 class Counter extends Component {
-  state = { count: 1 }
-
-  handleCountUp = () => {
-    this.setState(prevState => {
-      return { count: prevState.count + 1 }
-    })
-  }
-
-  handleCountDown = () => {
-    this.setState(prevState => {
-      return { count: prevState.count - 1 }
-    })
-  }
-
   render() {
+    console.log(this.props)
+
     return (
       <div>
-        <p>{this.state.count}</p>
-        <button onClick={this.handleCountUp}> +1</button>
-        <button onClick={this.handleCountDown}> -1</button>
+        <p>{this.props.count}</p>
+        <button onClick={this.props.countUp}> +1</button>
+        <button onClick={this.props.countDown}> -1</button>
       </div>
     )
   }
 }
 
-export default Counter;
+const mapStateToProps = state => {
+  return {
+    count: state.count.value
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    countUp: () => {
+      dispatch(countUp())
+    },
+
+    countDown: () => {
+      dispatch(countDown())
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
