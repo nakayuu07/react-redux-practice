@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import Counter from './Counter';
 import * as serviceWorker from './serviceWorker';
 
-render(<App />, document.getElementById('root'));
+render(<Counter />, document.getElementById('root'));
 
 serviceWorker.unregister();
