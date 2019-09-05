@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import Event from './Event'
 import { readEvents } from '../actions'
@@ -13,14 +14,17 @@ class Events extends Component {
     const { events } = this.props
 
     return (
-      events.map(event => {
-        return (
-          <Event
-            key={event.id}
-            event={event}
-          />
-        )
-      })
+      <>
+        {events.map(event => {
+          return (
+            <Event
+              key={event.id}
+              event={event}
+            />
+          )
+        })}
+        <Link to="events/new" >new events</Link >
+      </>
     );
   }
 }
