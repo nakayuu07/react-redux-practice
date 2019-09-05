@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import _ from 'lodash'
+
+import Event from './Event'
 import { readEvents } from '../actions'
 
 class Events extends Component {
@@ -9,21 +10,18 @@ class Events extends Component {
   }
 
   render() {
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>title</th>
-            <th>Body</th>
-          </tr>
-        </thead>
+    const { events } = this.props
 
-        <tbody>
-          {this.renderEvents()}
-        </tbody>
-      </table>
-    )
+    return (
+      events.map(event => {
+        return (
+          <Event
+            key={event.id}
+            event={event}
+          />
+        )
+      })
+    );
   }
 }
 
