@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+
+import Event from './Event'
 import { readEvents } from '../actions'
 
 class Events extends Component {
@@ -8,16 +10,25 @@ class Events extends Component {
   }
 
   render() {
-    return (
-      <div>
+    const { events } = this.props
 
-      </div>
-    )
+    return (
+      events.map(event => {
+        return (
+          <Event
+            key={event.id}
+            event={event}
+          />
+        )
+      })
+    );
   }
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    events: state.events
+  }
 }
 
 const mapDispatchToProps = ({ readEvents })
