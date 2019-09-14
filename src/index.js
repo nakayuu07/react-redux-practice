@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Events from './components/Events';
 import EventsNew from './components/EventsNew'
+import EventsShow from './components/EventsShow'
 import reducer from './reducers'
 import * as serviceWorker from './serviceWorker';
 
@@ -17,8 +18,10 @@ render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        <Route exact path='/events/new' component={EventsNew} />
         <Route exact path='/' component={Events} />
+        <Route exact path='/events' component={Events} />
+        <Route path='/events/new' component={EventsNew} />
+        <Route path='/events/:id' component={EventsShow} />
       </Switch>
     </BrowserRouter>
   </Provider>,
