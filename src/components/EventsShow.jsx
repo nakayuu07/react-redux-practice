@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
-import { fetchGetEvent, fetchDeleteEvent, fetchUpdateEvent } from '../actions'
+import { getEvent, deleteEvent, updateEvent } from '../actions'
 
 class EventsShow extends Component {
 
@@ -23,6 +23,13 @@ class EventsShow extends Component {
     history.push('/')
   }
 
+  handleDeleteEvent = async () => {
+    const { deleteEvent, history, match } = this.props
+    const { params: { id }} = match
+    deleteEvent(parseInt(id))
+    history.push('/')
+  }
+
   render() {
     const { handleSubmit, pristine, submitting } = this.props
     return (
@@ -34,6 +41,7 @@ class EventsShow extends Component {
           <div>
             <input type="submit" value="Submit" disable={false} disabled={pristine || submitting} />
             <Link to="/">Cancel</Link>
+            <Link to="/" onClick={this.handleDeleteEvent}><p>Delete</p></Link>
           </div>
         </form>
       </>
@@ -41,7 +49,7 @@ class EventsShow extends Component {
   }
 }
 
-// const mapDispatchToProps = ({ postEvent })
+const mapDispatchToProps = ({ deleteEvent })
 
 const validate = values => {
   const errors = {}
@@ -51,6 +59,6 @@ const validate = values => {
   return errors
 }
 
-export default connect(null, null)(
+export default connect(null, mapDispatchToProps)(
   reduxForm({ validate, form: 'eventsNew' })(EventsShow)
 );
