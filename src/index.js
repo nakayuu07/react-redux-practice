@@ -19,7 +19,6 @@ render(
     <BrowserRouter>
       <Switch>
         <Route exact path='/' component={Events} />
-        <Route exact path='/events' component={Events} />
         <Route path='/events/new' component={EventsNew} />
         <Route path='/events/:id' component={EventsShow} />
       </Switch>
